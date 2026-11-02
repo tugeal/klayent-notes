@@ -10,8 +10,8 @@ Open `index.html` in a browser to explore the demo. For production, deploy the r
 
 1. Create a Supabase project and enable Email / Magic Link sign-in.
 2. In the SQL Editor, run `supabase/schema.sql`. Replace `REPLACE_WITH_YOUR_EMAIL` with the administrator's exact email **before** running it.
-3. In Supabase Authentication settings, add your deployed URL and local URL to Redirect URLs.
-4. Add the project URL, anon key, and admin email to `config.js`.
+3. In **Authentication → URL Configuration**, set **Site URL** to `https://klayent-notes.vercel.app` and add both `https://klayent-notes.vercel.app` and `http://localhost:3000` to **Redirect URLs**.
+4. Add the project URL, anon key, deployed app URL, and admin email to `config.js`.
 5. Deploy. Do not put the Supabase service-role key in `config.js`.
 
 ## Roles

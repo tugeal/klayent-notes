@@ -26,8 +26,8 @@ alter table public.notes enable row level security;
 -- All signed-in team members may read. Only the named admin may change content.
 create policy "authenticated users can read clients" on public.clients for select to authenticated using (true);
 create policy "authenticated users can read notes" on public.notes for select to authenticated using (true);
-create policy "admin manages clients" on public.clients for all to authenticated using (auth.jwt() ->> 'email' = 'REPLACE_WITH_YOUR_EMAIL') with check (auth.jwt() ->> 'email' = 'REPLACE_WITH_YOUR_EMAIL');
-create policy "admin manages notes" on public.notes for all to authenticated using (auth.jwt() ->> 'email' = 'REPLACE_WITH_YOUR_EMAIL') with check (auth.jwt() ->> 'email' = 'REPLACE_WITH_YOUR_EMAIL');
+create policy "admin manages clients" on public.clients for all to authenticated using (auth.jwt() ->> 'email' = 'tundaggeraldaldrian@gmail.com') with check (auth.jwt() ->> 'email' = 'tundaggeraldaldrian@gmail.com');
+create policy "admin manages notes" on public.notes for all to authenticated using (auth.jwt() ->> 'email' = 'tundaggeraldaldrian@gmail.com') with check (auth.jwt() ->> 'email' = 'tundaggeraldaldrian@gmail.com');
 
 -- Add your first client after setting your own email in the policies.
 insert into public.clients (name, summary, viber_group) values
