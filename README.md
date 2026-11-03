@@ -14,6 +14,10 @@ Open `index.html` in a browser to explore the demo. For production, deploy the r
 4. Add the project URL, anon key, deployed app URL, and admin email to `config.js`.
 5. Deploy. Do not put the Supabase service-role key in `config.js`.
 
+## Note images
+
+To enable image attachments, run `supabase/images-migration.sql` once in the Supabase SQL Editor. Images are stored in a private bucket: signed-in teammates can view them, while only the configured admin can upload or remove them.
+
 ## Roles
 
 All authenticated people can read clients and notes. The administrator defined in the database policy can create or change them. This is enforced by Supabase Row Level Security, not merely hidden interface controls.

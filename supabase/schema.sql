@@ -20,6 +20,9 @@ create table if not exists public.notes (
   updated_at timestamptz not null default now()
 );
 
+-- Run this too if the notes table already exists.
+alter table public.notes add column if not exists image_path text;
+
 alter table public.clients enable row level security;
 alter table public.notes enable row level security;
 
@@ -32,3 +35,15 @@ create policy "admin manages notes" on public.notes for all to authenticated usi
 -- Add your first client after setting your own email in the policies.
 insert into public.clients (name, summary, viber_group) values
   ('Example client', 'Replace this client with a real approved client record.', '');
+
+-- Private image storage. Readers can view images; only the admin can upload or remove them.
+insert into storage.buckets (id, name, public) values ('note-images', 'note-images', false)
+on conflict (id) do update set public = false;
+
+drop policy if exists "team can view note images" on storage.objects;
+drop policy if exists "admin manages note images" on storage.objects;
+create policy "team can view note images" on storage.objects for select to authenticated
+  using (bucket_id = 'note-images');
+create policy "admin manages note images" on storage.objects for all to authenticated
+  using (bucket_id = 'note-images' and auth.jwt() ->> 'email' = 'tundaggeraldaldrian@gmail.com')
+  with check (bucket_id = 'note-images' and auth.jwt() ->> 'email' = 'tundaggeraldaldrian@gmail.com');
