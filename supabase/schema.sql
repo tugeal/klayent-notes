@@ -22,6 +22,7 @@ create table if not exists public.notes (
 
 -- Run this too if the notes table already exists.
 alter table public.notes add column if not exists image_path text;
+alter table public.notes add column if not exists image_paths text[] not null default '{}';
 
 alter table public.clients enable row level security;
 alter table public.notes enable row level security;

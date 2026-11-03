@@ -16,7 +16,7 @@ Open `index.html` in a browser to explore the demo. For production, deploy the r
 
 ## Note images
 
-To enable image attachments, run `supabase/images-migration.sql` once in the Supabase SQL Editor. Images are stored in a private bucket: signed-in teammates can view them, while only the configured admin can upload or remove them.
+To enable one or more image attachments per note, run `supabase/images-migration.sql` once in the Supabase SQL Editor. Images are stored in a private bucket: signed-in teammates can view them, while only the configured admin can upload or remove them.
 
 ## Roles
 

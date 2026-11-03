@@ -1,5 +1,10 @@
 -- Run this once in Supabase SQL Editor to enable note images.
 alter table public.notes add column if not exists image_path text;
+alter table public.notes add column if not exists image_paths text[] not null default '{}';
+
+-- Preserve any previously attached single image in the new multi-image field.
+update public.notes set image_paths = array_append(image_paths, image_path)
+where image_path is not null and not (image_path = any(image_paths));
 
 insert into storage.buckets (id, name, public) values ('note-images', 'note-images', false)
 on conflict (id) do update set public = false;
